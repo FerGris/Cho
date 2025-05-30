@@ -1,0 +1,10 @@
+.grid-contenedor {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ajusta automáticamente el número de columnas */
+    justify-items: center; /* Centra los elementos en cada celda */
+    gap: 20px; /* Espacio entre elementos */
+}
+
+.producto {
+    text-align: center; /* Centra el texto */
+}

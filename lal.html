@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIMFIT - Membresía</title>
+    <style>
+        /* Estilos básicos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 2em;
+        }
+
+        /* Estilos de los planes */
+        .plan {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            width: 40%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .plan h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #f04e23;
+        }
+
+        .plan p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .cta {
+            background: #f04e23;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .cta:hover {
+            background: #e03d14;
+        }
+
+        /* Estilo del formulario */
+        .form-inscripcion {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .form-inscripcion input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-inscripcion button {
+            background: #f04e23;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Estilo para el ticket */
+        .ticket {
+            display: none;
+            margin-top: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .ticket h3 {
+            margin-bottom: 15px;
+        }
+
+        .ticket p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Elige tu Plan de Membresía</h1>
+
+    <!-- Planes -->
+    <div class="plan">
+        <h3>Plan Básico</h3>
+        <p>Precio: $200</p>
+        <a href="#" class="cta" data-plan="basico">Inscribirse</a>
+        <div class="form-inscripcion" id="form-basico">
+            <input type="text" id="nombre-basico" placeholder="Nombre completo" required>
+            <input type="email" id="correo-basico" placeholder="Correo electrónico" required>
+            <input type="tel" id="telefono-basico" placeholder="Teléfono" required>
+            <button type="button" class="enviar" data-plan="Básico" data-precio="200">Enviar Inscripción</button>
+        </div>
+    </div>
+
+    <div class="plan">
+        <h3>Plan Premium</h3>
+        <p>Precio: $440</p>
+        <a href="#" class="cta" data-plan="premium">Inscribirse</a>
+        <div class="form-inscripcion" id="form-premium">
+            <input type="text" id="nombre-premium" placeholder="Nombre completo" required>
+            <input type="email" id="correo-premium" placeholder="Correo electrónico" required>
+            <input type="tel" id="telefono-premium" placeholder="Teléfono" required>
+            <button type="button" class="enviar" data-plan="Premium" data-precio="440">Enviar Inscripción</button>
+        </div>
+    </div>
+
+    <!-- Ticket de Inscripción -->
+    <div class="ticket" id="ticket">
+        <h3>Ticket de Inscripción</h3>
+        <p id="ticket-plan"></p>
+        <p id="ticket-nombre"></p>
+        <p id="ticket-correo"></p>
+        <p id="ticket-telefono"></p>
+        <p id="ticket-costo"></p>
+        <button onclick="descargarTicket()">Descargar Ticket</button>
+    </div>
+
+    <script>
+        // Mostrar el formulario correspondiente al plan
+        document.querySelectorAll('.cta').forEach(button => {
+            button.onclick = function(event) {
+                event.preventDefault();
+                var plan = event.target.dataset.plan;
+                document.querySelector(`#form-${plan}`).style.display = 'block';
+            }
+        });
+
+        // Función para procesar la inscripción
+        document.querySelectorAll('.enviar').forEach(button => {
+            button.onclick = function() {
+                var plan = button.dataset.plan;
+                var precio = button.dataset.precio;
+                var nombre = document.getElementById(`nombre-${plan}`).value;
+                var correo = document.getElementById(`correo-${plan}`).value;
+                var telefono = document.getElementById(`telefono-${plan}`).value;
+
+                // Mostrar el ticket con los datos ingresados
+                document.getElementById('ticket-plan').innerText = `Plan: ${plan}`;
+                document.getElementById('ticket-nombre').innerText = `Nombre: ${nombre}`;
+                document.getElementById('ticket-correo').innerText = `Correo: ${correo}`;
+                document.getElementById('ticket-telefono').innerText = `Teléfono: ${telefono}`;
+                document.getElementById('ticket-costo').innerText = `Costo: $${precio}`;
+
+                document.getElementById('ticket').style.display = 'block';
+            }
+        });
+
+        // Función para descargar el ticket
+        function descargarTicket() {
+            var ticketContent = document.getElementById('ticket').innerText;
+            var blob = new Blob([ticketContent], { type: 'text/plain' });
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'ticket_inscripcion.txt';
+            link.click();
+        }
+    </script>
+
+</body>
+</html>

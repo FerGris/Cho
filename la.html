@@ -1,0 +1,559 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIMFIT</title>
+    <style>
+        /* Reset de estilo básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilo general del cuerpo */
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            background-image: url('Imagenes/bal.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+
+        /* Contenedor principal */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Estilo del encabezado */
+        header {
+            background: rgba(51, 51, 51, 0.8);
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo img {
+            margin-right: 10px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        header .logo h1 {
+            font-size: 1.8em;
+        }
+
+        header nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header nav .barra-busqueda {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        header nav .barra-busqueda input[type="text"] {
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        header nav .barra-busqueda button {
+            padding: 5px 10px;
+            border: none;
+            background: #555;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+
+        header nav .barra-busqueda button:hover {
+            background: #666;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin-left: 15px;
+        }
+
+        header nav a:hover {
+            background: #575757;
+        }
+
+        /* Estilo del banner principal */
+        .banner {
+            background: rgba(0, 0, 0, 0.6) url('banner.jpg') no-repeat center center/cover;
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .banner h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .banner p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .banner .cta {
+            background: #f04e23;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .banner .cta:hover {
+            background: #e03d14;
+        }
+
+        /* Estilo de categorías */
+        .categorias {
+            padding: 20px 0;
+            background: rgba(249, 249, 249, 0.9);
+        }
+
+        .categorias h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .categoria {
+            text-align: center;
+            margin: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            display: inline-block;
+            vertical-align: top;
+            width: calc(50% - 20px);
+        }
+
+        .categoria img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .categoria h3 {
+            margin: 10px 0;
+        }
+
+        .categoria .cta {
+            background: #f04e23;
+            color: #fff;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        .categoria .cta:hover {
+            background: #e03d14;
+        }
+
+        /* Estilo de la suscripción al boletín */
+        .suscripcion {
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+        }
+
+        .suscripcion h2 {
+            margin-bottom: 20px;
+        }
+
+        .suscripcion form {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .suscripcion input[type="email"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            width: 60%;
+            max-width: 300px;
+            margin-right: 10px;
+        }
+
+        .suscripcion button {
+            padding: 10px 20px;
+            border: none;
+            background: #f04e23;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .suscripcion button:hover {
+            background: #e03d14;
+        }
+
+        /* Estilo del pie de página */
+        footer {
+            background: rgba(51, 51, 51, 0.8);
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        footer .contacto,
+        footer .social,
+        footer .políticas {
+            flex: 1;
+            padding: 10px;
+        }
+
+        footer .contacto h2,
+        footer .social h2,
+        footer .políticas h2 {
+            margin-bottom: 10px;
+        }
+
+        footer .contacto p,
+        footer .social a,
+        footer .políticas a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+        }
+
+        footer .social a:hover,
+        footer .políticas a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilo de la sección de Membresía */
+        .membresia {
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+        }
+
+        .membresia h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .membresia p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .membresia .cta {
+            background: #f04e23;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .membresia .cta:hover {
+            background: #e03d14;
+        }
+
+        /* Estilo del Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 5px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Estilo de los planes en el modal */
+        .planes {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .plan {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            width: calc(50% - 20px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .plan h3 {
+            margin-top: 0;
+        }
+
+        .plan ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .plan ul li {
+            margin-bottom: 10px;
+        }
+
+        .plan .cta {
+            background: #f04e23;
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .plan .cta:hover {
+            background: #e03d14;
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="Imagenes/image.png" alt="Logo de PRIMFIT" width="100" height="100">
+                <h1>PRIMFIT</h1>
+            </div>
+            <nav>
+                <div class="barra-busqueda">
+                    <input type="text" id="busqueda" placeholder="Buscar...">
+                    <button type="button" id="buscarBtn">Buscar</button>
+                </div>
+                <a href="#carrito" class="carrito">Carrito (0)</a>
+                <a href="file:///E:/prime/index.html" class="iniciar-sesion">Iniciar Sesión</a>
+                <a href="file:///E:/prime/register.html#" class="registrarse">Registrarse</a>
+                <a href="file:///E:/prime/register.html#" class="registrarse">Unirse</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección de Membresía -->
+    <section class="membresia">
+        <div class="container">
+            <h2>Membresía Exclusiva</h2>
+            <p>¡Únete a nuestra membresía exclusiva y obtén beneficios únicos! Disfruta de descuentos especiales, acceso anticipado a nuevos productos, y mucho más. ¡No te pierdas esta oportunidad!</p>
+            <a href="#modal-membresia" class="cta">Más Información</a>
+        </div>
+    </section>
+
+    <!-- Banner Principal -->
+    <section class="banner">
+        <div class="container">
+            <h2>Suplementos Naturales de Alta Calidad</h2>
+            <p>Descubre nuestros productos para un bienestar óptimo.</p>
+            <a href="#productos" class="cta">Compra Ahora</a>
+        </div>
+    </section>
+
+    <!-- Categorías de Productos -->
+    <section id="categorias" class="categorias">
+        <div class="container">
+            <h2>Categorías Populares</h2>
+            <div class="categoria">
+                <img src="Imagenes/3.png" alt="Vitaminas">
+                <h3>Vitaminas</h3>
+                <a href="HTML/Vitaminas.html" class="cta">Ver Categoría</a>
+            </div>
+            <div class="categoria">
+                <img src="Imagenes/4.png" alt="Creatinas">
+                <h3>Creatinas</h3>
+                <a href="HTML/Creatinas.html" class="cta">Ver Categoría</a>
+            </div>
+            <div class="categoria">
+                <img src="Imagenes/1.png" alt="Proteínas">
+                <h3>Proteínas</h3>
+                <a href="HTML/Proteínas.html" class="cta">Ver Categoría</a>
+            </div>
+            <div class="categoria">
+                <img src="Imagenes/2.png" alt="Multivitamínicos">
+                <h3>Multivitamínicos</h3>
+                <a href="HTML/Multivitamínicos.html" class="cta">Ver Categoría</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Suscripción al Boletín -->
+    <section class="suscripcion">
+        <div class="container">
+            <h2>Suscríbete a Nuestro Boletín</h2>
+            <form action="#" method="post">
+                <input type="email" placeholder="Tu correo electrónico" required>
+                <button type="submit">Suscribirse</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Información de Contacto -->
+    <footer>
+        <div class="container">
+            <div class="contacto">
+                <h2>Contacto</h2>
+                <p>Dirección: Calle Ficticia 123, Ciudad</p>
+                <p>Teléfono: (123) 456-7890</p>
+                <p>Correo: contacto@suplementosprimfit.com</p>
+            </div>
+            <div class="social">
+                <a href="#facebook">Facebook</a>
+                <a href="#twitter">Twitter</a>
+                <a href="#instagram">Instagram</a>
+            </div>
+            <div class="políticas">
+                <a href="#privacidad">Política de Privacidad</a>
+                <a href="#devoluciones">Política de Devoluciones</a>
+                <a href="#términos">Términos de Servicio</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal para Más Información -->
+    <div id="modal-membresia" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Detalles de Membresía Exclusiva</h2>
+            <p>Selecciona el plan que más te convenga y disfruta de nuestros beneficios exclusivos:</p>
+            <div class="planes">
+                <div class="plan">
+                    <h3>Plan Básico</h3>
+                    <p>Precio: $200</p>
+                    <p>Beneficios:</p>
+                    <ul>
+                        <li>Descuento en productos seleccionados</li>
+                        <li>Acceso anticipado a nuevas ofertas</li>
+                    </ul>
+                    <a href="#inscribirse" class="cta">Inscribirse</a>
+                </div>
+                <div class="plan">
+                    <h3>Plan Premium</h3>
+                    <p>Precio: $440</p>
+                    <p>Beneficios:</p>
+                    <ul>
+                        <li>Descuentos en todos los productos</li>
+                        <li>Acceso anticipado a nuevos productos</li>
+                        <li>Consultas personalizadas</li>
+                    </ul>
+                    <a href="#inscribirse" class="cta">Inscribirse</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para manejar la búsqueda
+        document.getElementById('buscarBtn').addEventListener('click', function() {
+            var query = document.getElementById('busqueda').value.toLowerCase().trim();
+            var pages = {
+                'creatina1': 'HTML/creatina1.html',
+                'creatina2': 'HTML/creatina2.html',
+                'creatina3': 'HTML/creatina3.html',
+                'creatina4': 'HTML/creatina4.html',
+                'multi1': 'HTML/multi1.html',
+                'multi2': 'HTML/multi2.html',
+                'multi3': 'HTML/multi3.html',
+                'multi4': 'HTML/multi4.html',
+                'multivitaminicos': 'HTML/Multivitamínicos.html',
+                'proteina1': 'HTML/proteina1.html',
+                'proteina2': 'HTML/proteina2.html',
+                'proteina3': 'HTML/proteina3.html',
+                'proteina4': 'HTML/proteina4.html',
+                'vitaminas1': 'HTML/vitaminas1.html',
+                'vitaminas2': 'HTML/vitaminas2.html',
+                'vitaminas3': 'HTML/vitaminas3.html',
+                'vitaminas4': 'HTML/vitaminas4.html'
+            };
+
+            if (pages[query]) {
+                window.location.href = pages[query];
+            } else {
+                alert('No se encontraron resultados para: ' + query);
+            }
+        });
+
+        // Obtener el modal
+        var modal = document.getElementById("modal-membresia");
+        // Obtener el botón que abre el modal
+        var btn = document.querySelector(".membresia .cta");
+        // Obtener el elemento <span> que cierra el modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // Cuando el usuario haga clic en el botón, abre el modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // Cuando el usuario haga clic en <span> (x), cierra el modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Cuando el usuario haga clic en cualquier parte fuera del modal, lo cierra
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
